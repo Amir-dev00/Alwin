@@ -1,0 +1,2120 @@
+/* Alwin — brand colors, Persian fonts, RTL, preloader, pricing wizard */
+
+/* ─── Alwinco brand palette ─── */
+:root {
+  --alwin-primary: rgb(0, 67, 133);       /* main brand blue */
+  --alwin-blue: rgb(18, 149, 211);        /* light blue accent */
+  --alwin-green: rgb(0, 167, 33);         /* green accent */
+  --alwin-gray: rgb(168, 169, 172);
+  --alwin-gray-light: rgb(238, 238, 239);
+
+  /* Override Redox template accents */
+  --theme: var(--alwin-primary);
+  --action: var(--alwin-blue);
+  --secondary: var(--alwin-gray);
+  --border: rgba(168, 169, 172, 0.4);
+  --black-2: var(--alwin-gray);
+  --white-2: var(--alwin-gray);
+
+  --font_instrumentsans: "Vazirmatn", Tahoma, sans-serif;
+  --font_thunder: "Vazirmatn", Tahoma, sans-serif;
+}
+
+/* Restore the OS cursor; the custom follower is removed. */
+html,
+body {
+  cursor: auto;
+}
+
+a,
+button,
+[type="button"],
+[type="submit"],
+[type="reset"],
+[role="button"],
+.rr-btn,
+label[for] {
+  cursor: pointer;
+}
+
+input,
+textarea {
+  cursor: text;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+input[type="file"],
+input[type="range"] {
+  cursor: pointer;
+}
+
+html[lang="fa"] body,
+html[lang="fa"] .section-title,
+html[lang="fa"] h1,
+html[lang="fa"] h2,
+html[lang="fa"] h3,
+html[lang="fa"] h4,
+html[lang="fa"] .font-instrumentsans-medium,
+html[lang="fa"] .text-slider-item .title,
+html[lang="fa"] .funfact-item .number,
+html[lang="fa"] .service-box .title,
+html[lang="fa"] .work-box .title,
+html[lang="fa"] .rr-btn,
+html[lang="fa"] .alwin-calc,
+html[lang="fa"] .footer-area .title {
+  font-family: "Vazirmatn", Tahoma, sans-serif !important;
+  letter-spacing: 0 !important;
+}
+
+html[lang="fa"] .section-title,
+html[lang="fa"] .hero-area .big-text {
+  text-transform: none !important;
+}
+
+html[lang="fa"] .hero-area .big-text {
+  font-family: "Vazirmatn", Tahoma, sans-serif !important;
+  font-weight: 800;
+  font-size: clamp(120px, 28vw, 420px);
+  line-height: 0.9;
+}
+
+/* Keep brand Latin stable in preloader */
+.big-text[dir="ltr"],
+.loader-wrap .load-text {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+html[dir="rtl"] .hero-area .section-title,
+html[dir="rtl"] .hero-area .text,
+html[dir="rtl"] .about-area .text,
+html[dir="rtl"] .footer-area .text,
+html[dir="rtl"] .work-area .text,
+html[dir="rtl"] .service-area .text,
+html[dir="rtl"] .funfact-area .text,
+html[dir="rtl"] .client-area .text {
+  text-align: right;
+}
+
+button.rr-btn[data-calculator-open] {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* ─── Preloader — stable font, no layout shift ─── */
+.loader-wrap {
+  position: fixed;
+  z-index: 999999;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  background: rgba(153,153,153,0.15);
+}
+
+.loader-wrap svg {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 110%;
+  fill: #fff;
+}
+
+.loader-wrap .loader-wrap-heading .load-text {
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  font-size: clamp(42px, 9vw, 76px);
+  font-weight: 800;
+  color: var(--alwin-primary);
+  z-index: 20;
+  letter-spacing: -0.03em;
+  min-width: 9ch;
+  text-align: center;
+  animation: alwin-load-pulse 1.1s ease-in-out infinite alternate;
+}
+
+@keyframes alwin-load-pulse {
+  0% { opacity: 0.55; transform: scale(0.98); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ─── Calculator overlay ─── */
+.alwin-calc {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.alwin-calc.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+}
+
+body.alwin-calc-open {
+  overflow: hidden;
+}
+
+.alwin-calc__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+.alwin-calc__panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  max-height: 94vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+  direction: rtl;
+}
+
+.alwin-calc.is-open .alwin-calc__panel {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .alwin-calc {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .alwin-calc__panel {
+    border-radius: 24px;
+    max-height: 88vh;
+    transform: translateY(24px) scale(0.96);
+    opacity: 0;
+  }
+
+  .alwin-calc.is-open .alwin-calc__panel {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.alwin-calc__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.alwin-calc__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--primary, #111);
+}
+
+.alwin-calc__close {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--alwin-gray-light);
+  color: #111;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.alwin-calc__steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px 16px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.alwin-calc__step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  color: #999;
+  flex-direction: row-reverse;
+}
+
+.alwin-calc__step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background: #eee;
+  color: #666;
+  font-size: 0.75rem;
+}
+
+.alwin-calc__step.is-active .alwin-calc__step-num,
+.alwin-calc__step.is-done .alwin-calc__step-num {
+  background: var(--theme, var(--alwin-primary));
+  color: #fff;
+}
+
+.alwin-calc__step-label {
+  display: none;
+}
+
+@media (min-width: 560px) {
+  .alwin-calc__step-label {
+    display: inline;
+  }
+}
+
+.alwin-calc__step-sep {
+  width: 12px;
+  height: 2px;
+  background: #e5e5e5;
+}
+
+.alwin-calc__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 20px 20px;
+}
+
+.alwin-calc__lead {
+  font-size: 0.9375rem;
+  color: #666;
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+.alwin-calc__sublead {
+  font-size: 0.875rem;
+  color: #888;
+  margin: 20px 0 10px;
+  font-weight: 500;
+}
+
+/* Step 1 — tabs */
+.alwin-calc__tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.alwin-calc__tab-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 16px;
+  border: 2px solid #eee;
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.alwin-calc__tab-card:hover {
+  border-color: var(--theme, var(--alwin-primary));
+  box-shadow: 0 8px 24px rgba(255, 106, 58, 0.15);
+  transform: translateY(-2px);
+}
+
+.alwin-calc__tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 10px;
+  background: #eef2f6;
+  color: #1f4e79;
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.alwin-calc__tab-badge--upvc {
+  background: #fff3ec;
+  color: var(--theme, var(--alwin-primary));
+}
+
+.alwin-calc__chips {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.alwin-calc__chip {
+  border: 1px solid #e8e8e8;
+  background: #fafafa;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.8125rem;
+  font-family: inherit;
+  cursor: pointer;
+  color: #555;
+}
+
+.alwin-calc__chip.is-active,
+.alwin-calc__chip:hover {
+  border-color: var(--theme, var(--alwin-primary));
+  background: rgba(0, 67, 133, 0.08);
+  color: var(--theme, var(--alwin-primary));
+}
+
+.alwin-calc__cat-icon {
+  display: block;
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.alwin-calc__cat-hint {
+  display: block;
+  font-size: 0.6875rem;
+  color: #999;
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.alwin-calc__tab-label {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.alwin-calc__tab-hint {
+  font-size: 0.75rem;
+  color: #999;
+}
+
+/* Step 2 — categories */
+.alwin-calc__categories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 480px) {
+  .alwin-calc__categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.alwin-calc__crumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 20px 8px;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.alwin-calc__crumb span {
+  background: var(--alwin-gray-light);
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #555;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alwin-calc__crumb i {
+  font-style: normal;
+  color: #ccc;
+}
+
+.alwin-calc__search-wrap {
+  margin-bottom: 12px;
+}
+
+.alwin-calc__search {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+.alwin-calc__search:focus {
+  outline: none;
+  border-color: var(--theme, var(--alwin-primary));
+  background: #fff;
+}
+
+.alwin-calc__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #999;
+  padding: 32px 16px;
+  font-size: 0.875rem;
+}
+
+.alwin-calc__cat-card.is-selected,
+.alwin-calc__model-card.is-selected {
+  border-color: var(--theme, var(--alwin-primary));
+  background: rgba(0, 67, 133, 0.06);
+  box-shadow: 0 0 0 1px var(--alwin-primary);
+}
+
+.alwin-calc__model-card.is-selected::after {
+  content: "✓";
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--theme, var(--alwin-primary));
+  color: #fff;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alwin-calc__model-card {
+  position: relative;
+}
+
+.alwin-calc__cat-card {
+  border: 2px solid #eee;
+  border-radius: 14px;
+  background: #fafafa;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  padding: 18px 14px;
+}
+
+.alwin-calc__cat-card:hover {
+  border-color: var(--theme, var(--alwin-primary));
+  background: rgba(0, 67, 133, 0.06);
+}
+
+.alwin-calc__cat-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: #111;
+}
+
+.alwin-calc__cat-count {
+  display: block;
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 4px;
+}
+
+/* Step 3 — model grid */
+.alwin-calc__models {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 560px) {
+  .alwin-calc__models {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.alwin-calc__model-card {
+  border: 2px solid #eee;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+  padding: 0;
+  text-align: center;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.alwin-calc__model-card:hover {
+  border-color: var(--theme, var(--alwin-primary));
+  box-shadow: 0 4px 16px rgba(255, 106, 58, 0.12);
+}
+
+.alwin-calc__model-img-wrap {
+  aspect-ratio: 1;
+  background: linear-gradient(145deg, #f8f8f8, #efefef);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.alwin-calc__model-img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.alwin-calc__model-name {
+  display: block;
+  padding: 10px 8px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #333;
+}
+
+/* Step 4 — selected + options */
+.alwin-calc__selected-model {
+  margin-bottom: 16px;
+}
+
+.alwin-calc__selected-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: #f8f8f8;
+  border-radius: 14px;
+  border: 1px solid #eee;
+}
+
+.alwin-calc__selected-inner img {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.alwin-calc__selected-label {
+  display: block;
+  font-size: 0.75rem;
+  color: #999;
+}
+
+.alwin-calc__selected-inner strong {
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.alwin-calc__options {
+  display: grid;
+  gap: 12px;
+}
+
+.alwin-calc__fields {
+  display: grid;
+  gap: 12px;
+}
+
+.alwin-calc__fields--dims {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 479px) {
+  .alwin-calc__fields--dims {
+    grid-template-columns: 1fr;
+  }
+}
+
+.alwin-calc__field label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.alwin-calc__field input,
+.alwin-calc__select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.alwin-calc__field input:focus,
+.alwin-calc__select:focus {
+  outline: none;
+  border-color: var(--theme, var(--alwin-primary));
+}
+
+.alwin-calc__estimate {
+  margin-top: 20px;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, rgba(0, 67, 133, 0.06) 0%, #fff 100%);
+  border: 1px solid rgba(0, 67, 133, 0.18);
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.alwin-calc__estimate-label {
+  display: block;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.alwin-calc__estimate-hint {
+  display: block;
+  font-size: 0.7rem;
+  color: #aaa;
+  margin-top: 2px;
+}
+
+.alwin-calc__estimate-value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--theme, var(--alwin-primary));
+  white-space: nowrap;
+}
+
+/* Step 5 — summary */
+.alwin-calc__summary {
+  background: #f8f8f8;
+  border-radius: 14px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border: 1px solid #eee;
+}
+
+.alwin-calc__summary-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.alwin-calc__summary-row strong {
+  color: #111;
+  text-align: left;
+  max-width: 60%;
+}
+
+.alwin-calc__summary-row--price strong {
+  color: var(--theme, var(--alwin-primary));
+  font-size: 1rem;
+}
+
+.alwin-calc__inline-error {
+  color: #dc2626;
+  font-size: 0.8125rem;
+  margin: 12px 0 0;
+  text-align: center;
+}
+
+.alwin-calc__inline-error[hidden],
+.alwin-calc__error[hidden] {
+  display: none !important;
+}
+
+.alwin-calc__error {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+.alwin-calc__success-icon {
+  width: 72px;
+  height: 72px;
+  margin: 24px auto 16px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #fff;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: alwin-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes alwin-pop {
+  0% { transform: scale(0); }
+  70% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.alwin-calc__success-title {
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.alwin-calc__success-text {
+  text-align: center;
+  color: #666;
+  margin: 0 0 24px;
+}
+
+.alwin-calc__success-actions {
+  text-align: center;
+}
+
+.alwin-calc__foot {
+  display: flex;
+  gap: 10px;
+  padding: 16px 20px 24px;
+  border-top: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.alwin-calc__btn-back,
+.alwin-calc__btn-next,
+.alwin-calc__btn-submit {
+  flex: 1;
+  padding: 14px 20px;
+  border-radius: 100px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.alwin-calc__btn-back {
+  flex: 0 0 auto;
+  min-width: 88px;
+  background: var(--alwin-gray-light);
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.alwin-calc__btn-back:hover {
+  background: #eee;
+}
+
+.alwin-calc__btn-next,
+.alwin-calc__btn-submit {
+  background: var(--theme, var(--alwin-primary));
+  color: #fff;
+}
+
+.alwin-calc__btn-next:hover,
+.alwin-calc__btn-submit:hover {
+  opacity: 0.92;
+}
+
+.alwin-calc__btn-next:disabled,
+.alwin-calc__btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.alwin-calc__foot[hidden],
+[hidden] {
+  display: none !important;
+}
+
+/* ─── Brand color usage across template ─── */
+html[lang="fa"] .hero-area .big-text {
+  color: var(--alwin-primary);
+}
+
+html[lang="fa"] .rr-btn.hover-bg-theme {
+  background-color: var(--alwin-primary);
+  border-color: var(--alwin-primary);
+}
+
+html[lang="fa"] .rr-btn.hover-bg-theme::before {
+  background-color: var(--alwin-blue);
+}
+
+html[lang="fa"] .rr-btn.btn-border {
+  border-color: var(--alwin-gray);
+  color: var(--primary);
+}
+
+html[lang="fa"] .rr-btn.btn-border:hover,
+html[lang="fa"] .rr-btn.btn-border:focus {
+  border-color: var(--alwin-primary);
+  background-color: var(--alwin-primary);
+  color: #fff;
+}
+
+html[lang="fa"] .main-menu a:hover,
+html[lang="fa"] .footer-nav-list a:hover,
+html[lang="fa"] .service-list a:hover {
+  color: var(--alwin-blue);
+}
+
+html[lang="fa"] .progress-wrap svg path {
+  stroke: var(--alwin-primary);
+}
+
+html[lang="fa"] .feature-box .number,
+html[lang="fa"] .funfact-item .number {
+  color: var(--alwin-primary);
+}
+
+html[lang="fa"] .work-box .meta .tag,
+html[lang="fa"] .alwin-calc__crumb span {
+  background: var(--alwin-gray-light);
+  color: #444;
+}
+
+html[lang="fa"] .alwin-calc__step {
+  color: var(--alwin-gray);
+}
+
+html[lang="fa"] .alwin-calc__step-num {
+  background: var(--alwin-gray-light);
+  color: var(--alwin-gray);
+}
+
+html[lang="fa"] .alwin-calc__panel,
+html[lang="fa"] .alwin-calc__cat-card,
+html[lang="fa"] .alwin-calc__model-card,
+html[lang="fa"] .alwin-calc__tab-card {
+  border-color: var(--alwin-gray-light);
+}
+
+html[lang="fa"] .alwin-calc__lead,
+html[lang="fa"] .alwin-calc__tab-hint,
+html[lang="fa"] .alwin-calc__estimate-hint {
+  color: var(--alwin-gray);
+}
+
+html[lang="fa"] .alwin-calc__search {
+  background: var(--alwin-gray-light);
+  border-color: rgba(168, 169, 172, 0.35);
+}
+
+html[lang="fa"] .alwin-calc__btn-back {
+  background: var(--alwin-gray-light);
+  border-color: rgba(168, 169, 172, 0.45);
+  color: #333;
+}
+
+html[lang="fa"] .bg-theme {
+  background-color: var(--alwin-primary) !important;
+}
+
+/* ─── Primary buttons: white text ─── */
+html[lang="fa"] .rr-btn.hover-bg-theme,
+html[lang="fa"] .rr-btn.hover-bg-theme .btn-wrap .text-one,
+html[lang="fa"] .rr-btn.hover-bg-theme .btn-wrap .text-two {
+  color: #fff !important;
+}
+
+html[lang="fa"] .rr-btn.hover-bg-theme:hover .btn-wrap .text-one,
+html[lang="fa"] .rr-btn.hover-bg-theme:hover .btn-wrap .text-two,
+html[lang="fa"] .rr-btn.hover-bg-theme:focus .btn-wrap .text-one,
+html[lang="fa"] .rr-btn.hover-bg-theme:focus .btn-wrap .text-two {
+  color: #fff !important;
+}
+
+html[lang="fa"] .rr-btn.btn-border:hover .btn-wrap .text-one,
+html[lang="fa"] .rr-btn.btn-border:hover .btn-wrap .text-two,
+html[lang="fa"] .rr-btn.btn-border:focus .btn-wrap .text-one,
+html[lang="fa"] .rr-btn.btn-border:focus .btn-wrap .text-two {
+  color: #fff !important;
+}
+
+html[lang="fa"] .alwin-calc__btn-next,
+html[lang="fa"] .alwin-calc__btn-submit {
+  color: #fff;
+}
+
+/* ─── Logo sizing ─── */
+html[lang="fa"] .header__logo .normal-logo,
+html[lang="fa"] .offset-logo img {
+  height: 36px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+}
+
+html[lang="fa"] .footer-logo img {
+  height: 40px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+/* ─── Hero title sizing ─── */
+html[lang="fa"] .hero-area .section-title {
+  font-size: 90px;
+  line-height: 1.08;
+}
+
+@media only screen and (max-width: 1919px) {
+  html[lang="fa"] .hero-area .section-title {
+    font-size: 62px;
+    line-height: 1.1;
+  }
+}
+
+@media only screen and (max-width: 1399px) {
+  html[lang="fa"] .hero-area .section-title {
+    font-size: 44px;
+    line-height: 1.12;
+  }
+}
+
+/* ─── Hero brand circle ─── */
+html[lang="fa"] .hero-area .award-wrapper:before,
+html[lang="fa"] .hero-area .award-wrapper:after {
+  display: none !important;
+}
+
+html[lang="fa"] .hero-area .award-wrapper {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+html[lang="fa"] .hero-area .award-wrapper .circle-text-wrapper,
+html[lang="fa"] .hero-area .award-wrapper .alwin-circle-wrap {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+html[lang="fa"] .hero-area .award-wrapper .circle-text,
+html[lang="fa"] .hero-area .award-wrapper .alwin-circle {
+  width: 182px;
+  height: 182px;
+  padding: 0;
+}
+
+html[lang="fa"] .hero-area .circle-text:before {
+  display: none;
+}
+
+html[lang="fa"] .hero-area .alwin-circle-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: textRotation 8s linear infinite;
+}
+
+html[lang="fa"] .hero-area .alwin-circle-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 38%;
+  height: auto;
+  object-fit: contain;
+  z-index: 1;
+}
+
+/* ─── CTA — template-style title link (opens calculator) ─── */
+html[lang="fa"] .cta-area .section-title {
+  font-family: "Vazirmatn", Tahoma, sans-serif !important;
+  font-size: clamp(1.125rem, 2.2vw, 1.75rem);
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2 !important;
+  max-width: 11rem;
+  text-align: center;
+}
+
+html[lang="fa"] .cta-area .section-title a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+html[lang="fa"] .cta-area .section-title a:hover,
+html[lang="fa"] .cta-area .section-title a:focus {
+  color: var(--white);
+}
+
+/* Homepage calculator CTA — real button, in document flow */
+.cta-area--static {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+  position: relative;
+  margin-top: 88px;
+  background: transparent;
+  cursor: auto;
+}
+
+@media only screen and (max-width: 1919px) {
+  .cta-area--static {
+    margin-top: 76px;
+  }
+}
+
+@media only screen and (max-width: 1399px) {
+  .cta-area--static {
+    margin-top: 68px;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .cta-area--static {
+    margin-top: 52px;
+  }
+}
+
+.cta-area--static .cta-area-inner {
+  display: block;
+  width: 100%;
+  translate: none;
+  scale: none;
+}
+
+.cta-area--static .area-bg {
+  display: none;
+}
+
+.alwin-cta {
+  --cta-x: 78%;
+  --cta-y: 28%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px 56px;
+  padding: 52px 60px;
+  border-radius: 28px;
+  color: #fff;
+  background:
+    radial-gradient(520px 240px at var(--cta-x) var(--cta-y), rgba(18, 149, 211, 0.42), transparent 58%),
+    linear-gradient(125deg, rgb(0, 42, 88) 0%, var(--alwin-primary) 48%, rgb(6, 92, 158) 100%);
+  box-shadow:
+    0 18px 48px rgba(0, 67, 133, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.alwin-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.07) 42%, transparent 68%);
+  background-size: 220% 100%;
+  animation: alwin-cta-sheen 8s ease-in-out infinite;
+}
+
+.alwin-cta__orb {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(8px);
+}
+
+.alwin-cta__orb--a {
+  width: 180px;
+  height: 180px;
+  top: -70px;
+  left: -40px;
+  background: rgba(18, 149, 211, 0.38);
+  animation: alwin-cta-orb-a 9s ease-in-out infinite;
+}
+
+.alwin-cta__orb--b {
+  width: 140px;
+  height: 140px;
+  right: 18%;
+  bottom: -60px;
+  background: rgba(255, 255, 255, 0.12);
+  animation: alwin-cta-orb-b 11s ease-in-out infinite;
+}
+
+.alwin-cta__copy,
+.alwin-cta__action {
+  position: relative;
+  z-index: 1;
+}
+
+.alwin-cta__copy {
+  min-width: 0;
+}
+
+.alwin-cta__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgb(168, 220, 245);
+}
+
+.alwin-cta__live {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #5ee08a;
+  box-shadow: 0 0 0 0 rgba(94, 224, 138, 0.7);
+  animation: alwin-cta-live 1.8s ease-out infinite;
+}
+
+.alwin-cta__title {
+  margin: 0 0 10px;
+  font-family: "Vazirmatn", Tahoma, sans-serif !important;
+  font-size: clamp(1.35rem, 2.1vw, 2rem);
+  font-weight: 800;
+  line-height: 1.45 !important;
+  color: #fff;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+.alwin-cta__hint {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.alwin-cta__action {
+  display: grid;
+  place-items: center;
+  justify-self: end;
+}
+
+.alwin-cta__btn-glow {
+  position: absolute;
+  width: 240px;
+  height: 90px;
+  border-radius: 999px;
+  background: rgb(18, 149, 211);
+  filter: blur(28px);
+  opacity: 0.55;
+  animation: alwin-cta-breathe 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.alwin-cta__btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 64px;
+  min-width: 240px;
+  padding: 16px 22px 16px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--alwin-primary);
+  font-family: "Vazirmatn", Tahoma, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow:
+    0 14px 32px rgba(0, 20, 50, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.alwin-cta__btn::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: -40%;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  transform: skewX(-18deg);
+  animation: alwin-cta-shine 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.alwin-cta__btn-label,
+.alwin-cta__btn-icon {
+  position: relative;
+  z-index: 1;
+}
+
+.alwin-cta__btn-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--alwin-primary);
+  color: #fff;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.25s ease;
+}
+
+.alwin-cta__btn-icon svg {
+  display: block;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .alwin-cta__btn:hover {
+    transform: translateY(-4px) scale(1.03);
+    background: var(--alwin-blue);
+    color: #fff;
+    box-shadow:
+      0 22px 40px rgba(0, 20, 50, 0.32),
+      0 0 0 6px rgba(18, 149, 211, 0.22);
+  }
+
+  .alwin-cta__btn:hover .alwin-cta__btn-icon {
+    background: #fff;
+    color: var(--alwin-primary);
+    transform: translateX(-5px);
+  }
+}
+
+.alwin-cta__btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.alwin-cta__btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+@keyframes alwin-cta-sheen {
+  0%, 100% { background-position: 100% 0; }
+  50% { background-position: 0 0; }
+}
+
+@keyframes alwin-cta-orb-a {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(28px, 18px); }
+}
+
+@keyframes alwin-cta-orb-b {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-22px, -16px); }
+}
+
+@keyframes alwin-cta-live {
+  0% { box-shadow: 0 0 0 0 rgba(94, 224, 138, 0.65); }
+  100% { box-shadow: 0 0 0 10px rgba(94, 224, 138, 0); }
+}
+
+@keyframes alwin-cta-breathe {
+  0%, 100% { opacity: 0.4; transform: scale(0.92); }
+  50% { opacity: 0.75; transform: scale(1.08); }
+}
+
+@keyframes alwin-cta-shine {
+  0%, 55% { transform: skewX(-18deg) translateX(0); }
+  100% { transform: skewX(-18deg) translateX(420%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alwin-cta::before,
+  .alwin-cta__orb,
+  .alwin-cta__live,
+  .alwin-cta__btn-glow,
+  .alwin-cta__btn::before {
+    animation: none;
+  }
+
+  .alwin-cta__btn,
+  .alwin-cta__btn-icon {
+    transition: none;
+  }
+
+  .alwin-cta__btn:hover {
+    transform: none;
+  }
+}
+
+.productivity-area .section-title span,
+.dark .productivity-area .section-title span {
+  color: var(--alwin-blue);
+}
+
+/* ─── Footer copyright + back-to-top ─── */
+html[lang="fa"] .footer-area .copyright-area {
+  position: relative;
+  z-index: 1;
+}
+
+html[lang="fa"] .footer-area .copyright-area-inner {
+  padding: 20px 16px 28px;
+  padding-inline-end: 72px;
+}
+
+html[lang="fa"] .footer-area .copyright-text .text {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+html[lang="fa"] .progress-wrap {
+  z-index: 100;
+  left: 20px;
+  right: auto;
+}
+
+html[lang="fa"] .footer-area .footer-widget-wrapper {
+  grid-template-columns: auto auto auto;
+  justify-content: space-between;
+  gap: 24px 48px;
+}
+
+/* ─── Calculator: panels & compact steps ─── */
+.alwin-calc__step-panel {
+  opacity: 0.96;
+  line-height: 1.5;
+}
+
+.alwin-calc__body {
+  padding: 6px 16px 16px;
+}
+
+.alwin-calc__lead {
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
+.alwin-calc__categories {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 479px) {
+  .alwin-calc__categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.alwin-calc__cat-card {
+  padding: 10px 8px;
+  min-height: 0;
+}
+
+.alwin-calc__cat-label {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.alwin-calc__cat-count {
+  font-size: 0.6875rem;
+  margin-top: 2px;
+}
+
+.alwin-calc__options--compact {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 479px) {
+  .alwin-calc__options--compact {
+    grid-template-columns: 1fr;
+  }
+}
+
+.alwin-calc__options--compact .alwin-calc__field label {
+  font-size: 0.75rem;
+  margin-bottom: 4px;
+}
+
+.alwin-calc__options--compact .alwin-calc__select {
+  padding: 10px 10px;
+  font-size: 0.8125rem;
+}
+
+.alwin-calc__fields--compact {
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.alwin-calc__fields--compact .alwin-calc__field input {
+  padding: 10px 12px;
+  font-size: 0.875rem;
+}
+
+.alwin-calc__selected-inner {
+  padding: 8px 12px;
+  margin-bottom: 10px;
+}
+
+.alwin-calc__selected-inner img {
+  width: 48px;
+  height: 48px;
+}
+
+.alwin-calc__selected-inner strong {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.alwin-calc__estimate--full {
+  margin-top: 0;
+  padding: 14px 16px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.alwin-calc__estimate-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.alwin-calc__estimate-qty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 67, 133, 0.12);
+}
+
+.alwin-calc__estimate-qty label {
+  font-size: 0.8125rem;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.alwin-calc__estimate-qty input {
+  width: 80px;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+.alwin-calc__breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  padding-top: 8px;
+  font-size: 0.75rem;
+  color: #667;
+}
+
+.alwin-calc__breakdown span {
+  background: rgba(0, 67, 133, 0.06);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.alwin-calc__tab-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 67, 133, 0.12);
+}
+
+.alwin-calc__model-name {
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  padding: 8px 6px;
+}
+
+.alwin-calc__model-img-wrap {
+  padding: 8px;
+}
+
+.alwin-calc__panel {
+  max-height: 92vh;
+}
+
+.alwin-calc__head {
+  padding: 16px 20px 10px;
+}
+
+.alwin-calc__steps {
+  padding: 8px 12px;
+}
+
+/* ─── unified site footer (alwin-footer) ─── */
+.footer-area.alwin-footer {
+  background: linear-gradient(180deg, #f7f9fb 0%, #eef2f6 100%);
+  border-top: 1px solid var(--border);
+  margin-top: 0;
+}
+
+.alwin-footer__inner {
+  padding-top: 64px;
+  padding-bottom: 36px;
+}
+
+.alwin-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 36px 28px;
+  align-items: start;
+}
+
+.alwin-footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.alwin-footer__logo {
+  display: inline-flex;
+  max-width: 148px;
+}
+
+.alwin-footer__logo img {
+  width: 100%;
+  height: auto;
+}
+
+.alwin-footer__tagline {
+  margin: 0;
+  max-width: 320px;
+  font-size: 14.5px;
+  line-height: 1.85;
+  color: var(--alwin-gray);
+}
+
+.alwin-footer__contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.alwin-footer__contact li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--secondary);
+}
+
+.alwin-footer__contact i {
+  color: var(--alwin-primary);
+  margin-top: 4px;
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.alwin-footer__contact a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.alwin-footer__contact a:hover {
+  color: var(--alwin-primary);
+}
+
+.alwin-footer__title {
+  margin: 0 0 18px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.alwin-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.alwin-footer__links a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-size: 14.5px;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.alwin-footer__links a:hover {
+  color: var(--alwin-primary);
+  transform: translateX(-3px);
+}
+
+html[dir="ltr"] .alwin-footer__links a:hover {
+  transform: translateX(3px);
+}
+
+.alwin-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.alwin-footer__social-link {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.alwin-footer__social-link:hover {
+  background: var(--alwin-primary);
+  border-color: var(--alwin-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.alwin-footer__social-svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+  fill: currentColor;
+}
+
+.alwin-footer__bottom {
+  border-top: 1px solid var(--border);
+  padding: 18px 0 28px;
+}
+
+.alwin-footer__bottom-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.alwin-footer__copy,
+.alwin-footer__credit {
+  margin: 0;
+  font-size: 13px;
+  color: var(--alwin-gray);
+}
+
+.alwin-footer__credit {
+  font-weight: 500;
+  color: var(--secondary);
+}
+
+@media (max-width: 1199px) {
+  .alwin-footer__grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .alwin-footer__inner {
+    padding-top: 48px;
+  }
+
+  .alwin-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
+  }
+
+  .alwin-footer__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 575px) {
+  .alwin-footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .alwin-footer__bottom-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ─── homepage: real project & product media ─── */
+.works-wrapper-1 .work-box .thumb .image {
+  aspect-ratio: 4 / 3;
+  background: #f2f4f6;
+}
+
+.works-wrapper-1 .work-box .thumb .image a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.works-wrapper-1 .work-box .thumb .image picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.works-wrapper-1 .work-box .thumb .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.services-wrapper-1 .service-box .thumb .home-product-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: linear-gradient(150deg, #f2f4f6, #e8ebee);
+  border-radius: inherit;
+}
+
+.services-wrapper-1 .service-box .thumb .home-product-media picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.services-wrapper-1 .service-box .thumb .home-product-media__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.services-wrapper-1 .service-box .thumb .home-product-media__img--close {
+  opacity: 1;
+  z-index: 1;
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.services-wrapper-1 .service-box .thumb .home-product-media__img--open {
+  opacity: 0;
+  z-index: 2;
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .services-wrapper-1 .service-box:hover .home-product-media__img--close {
+    opacity: 0;
+  }
+
+  .services-wrapper-1 .service-box:hover .home-product-media__img--open {
+    opacity: 1;
+  }
+}
+
+/* ─── homepage: company logo capsule carousel ─── */
+.client-area .client-box {
+  width: 280px;
+  height: 110px;
+  padding: 14px 24px;
+  background-color: #fff !important;
+  border: 1px solid rgba(0, 67, 133, 0.1);
+  box-shadow: 0 8px 24px rgba(17, 17, 17, 0.06);
+}
+
+.client-area .client-box.bg-theme {
+  background-color: #f7f9fb !important;
+  border-color: rgba(0, 67, 133, 0.14);
+}
+
+.client-area .client-box picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.client-area .client-box img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+@media only screen and (max-width: 1919px) {
+  .client-area .client-box {
+    width: 240px;
+    height: 96px;
+    padding: 12px 20px;
+  }
+}
+
+@media only screen and (max-width: 1399px) {
+  .client-area .client-box {
+    width: 210px;
+    height: 84px;
+    padding: 10px 18px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .client-area .client-box {
+    width: 180px;
+    height: 72px;
+    padding: 8px 16px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .client-area .client-box {
+    width: 150px;
+    height: 62px;
+    padding: 8px 14px;
+  }
+}
+
+.video-box {
+  width: 100%;
+  overflow: hidden;
+}
+
+.video-box video.video-area {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.alwin-intro {
+  position: relative;
+}
+
+.alwin-intro__toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 67, 133, 0.58);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.alwin-intro__toggle:hover,
+.alwin-intro__toggle:focus-visible {
+  background: rgba(0, 67, 133, 0.86);
+  transform: scale(1.04);
+  outline: none;
+}
+
+.alwin-intro__rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.alwin-intro__ring {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: butt;
+}
+
+.alwin-intro__ring--track {
+  stroke: rgba(255, 255, 255, 0.22);
+}
+
+.alwin-intro__ring--buffered {
+  stroke: rgba(255, 255, 255, 0.58);
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+.alwin-intro__ring--played {
+  stroke: rgb(18, 149, 211);
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+}
+
+.alwin-intro__glyph {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.alwin-intro__icon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  display: none;
+}
+
+.alwin-intro.is-paused .alwin-intro__icon--play,
+.alwin-intro:not(.is-paused) .alwin-intro__icon--pause {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .alwin-intro__toggle {
+    transition: none;
+  }
+}
+
+/* Brand logos under intro video (replaces product-name text marquee) */
+.brand-clients__header {
+  padding-top: 36px;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.brand-clients__header .section-title-wrapper,
+.brand-clients__header .title-wrapper {
+  width: 100%;
+  text-align: center;
+}
+
+.brand-clients__title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 1.35;
+  color: var(--primary);
+  text-align: center;
+}
+
+.brand-logo-marquee .text-slider {
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+
+.brand-logo-marquee .brand-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding-inline: 8px;
+}
+
+.brand-logo-marquee .brand-logo-item img {
+  display: block;
+  width: auto;
+  max-width: 160px;
+  height: 48px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.72;
+  transition: opacity 0.25s ease, filter 0.25s ease;
+}
+
+.brand-logo-marquee .brand-logo-item img:hover {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+@media only screen and (max-width: 1199px) {
+  .brand-clients__title {
+    font-size: 30px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .brand-clients__header {
+    padding-top: 28px;
+  }
+
+  .brand-clients__title {
+    font-size: 26px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .brand-clients__header {
+    padding-top: 22px;
+    padding-bottom: 4px;
+  }
+
+  .brand-clients__title {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .brand-logo-marquee .text-slider {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .brand-logo-marquee .brand-logo-item {
+    height: 44px;
+  }
+
+  .brand-logo-marquee .brand-logo-item img {
+    max-width: 120px;
+    height: 36px;
+  }
+}

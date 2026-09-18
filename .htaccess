@@ -1,0 +1,46 @@
+Options -Indexes
+
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\.env">
+        Require all denied
+    </FilesMatch>
+    <FilesMatch "^(composer\.(json|lock)|artisan|phpunit\.xml)$">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
+
+    # Protect application internals
+    RewriteRule ^(includes|src|config|migrations|database|templates|vendor|bootstrap|tests|scripts|data|cms|_obsolete)/ - [F,L]
+    RewriteRule ^(\.env|\.git|composer\.(json|lock)|artisan|phpunit\.xml) - [F,L]
+    RewriteRule ^storage/(framework|logs|pail)(/|$) - [F,L]
+    RewriteRule ^storage/app/private(/|$) - [F,L]
+    RewriteRule ^storage/app/(?!public/) - [F,L]
+
+    # Never serve raw PHP except the front controller
+    RewriteCond %{REQUEST_URI} !^/index\.php$
+    RewriteRule \.php$ - [F,L]
+
+    # Laravel routes must not be shadowed by folders/files
+    RewriteRule ^(api|admin)(/|$) index.php [L]
+
+    # Public uploads live in storage/app/public and are served as /storage/...
+    RewriteCond %{DOCUMENT_ROOT}/storage/app/public/$1 -f
+    RewriteRule ^storage/(.*)$ storage/app/public/$1 [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>

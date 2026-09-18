@@ -1,0 +1,169 @@
+{
+    "products": [
+        {
+            "title": "پنجره لولایی تک حالته UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/1/close.webp",
+                "open": "assets/Images/Windows/1/open.webp",
+                "alt": "پنجره لولایی تک حالته UPVC",
+                "folder_number": 1
+            }
+        },
+        {
+            "title": "پنجره لولایی دو حالته Tilt & Turn UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/2/close.webp",
+                "open": "assets/Images/Windows/2/open.webp",
+                "alt": "پنجره لولایی دو حالته Tilt & Turn UPVC",
+                "folder_number": 2
+            }
+        },
+        {
+            "title": "پنجره آکاردئونی دو جداره UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/3/close.webp",
+                "open": "assets/Images/Windows/3/open.webp",
+                "alt": "پنجره آکاردئونی دو جداره UPVC",
+                "folder_number": 3
+            }
+        },
+        {
+            "title": "پنجره دوجداره آکاردئونی چهار لنگه UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/4/close.webp",
+                "open": "assets/Images/Windows/4/open.webp",
+                "alt": "پنجره دوجداره آکاردئونی چهار لنگه UPVC",
+                "folder_number": 4
+            }
+        },
+        {
+            "title": "پنجره دوجداره بالا بازشو UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/5/close.webp",
+                "open": "assets/Images/Windows/5/open.webp",
+                "alt": "پنجره دوجداره بالا بازشو UPVC",
+                "folder_number": 5
+            }
+        },
+        {
+            "title": "پنجره دوجداره دو لنگه بازشو UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/6/close.webp",
+                "open": "assets/Images/Windows/6/open.webp",
+                "alt": "پنجره دوجداره دو لنگه بازشو UPVC",
+                "folder_number": 6
+            }
+        },
+        {
+            "title": "پنجره دوجداره فرانسوی UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/7/close.webp",
+                "open": "assets/Images/Windows/7/open.webp",
+                "alt": "پنجره دوجداره فرانسوی UPVC",
+                "folder_number": 7
+            }
+        },
+        {
+            "title": "پنجره دوجداره فولکس واگنی UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/8/close.webp",
+                "open": "assets/Images/Windows/8/open.webp",
+                "alt": "پنجره دوجداره فولکس واگنی UPVC",
+                "folder_number": 8
+            }
+        },
+        {
+            "title": "پنجره دوجداره کشویی تک ریلی یک لنگه بازشو UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/9/close.webp",
+                "open": "assets/Images/Windows/9/open.webp",
+                "alt": "پنجره دوجداره کشویی تک ریلی یک لنگه بازشو UPVC",
+                "folder_number": 9
+            }
+        },
+        {
+            "title": "پنجره دوجداره کشویی ریلی دو لنگه متحرک UPVC",
+            "product_type": "window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/10/close.webp",
+                "open": "assets/Images/Windows/10/open.webp",
+                "alt": "پنجره دوجداره کشویی ریلی دو لنگه متحرک UPVC",
+                "folder_number": 10
+            }
+        },
+        {
+            "title": "پنجره و درب فرانسوی UPVC",
+            "product_type": "door_or_window",
+            "category": "درب و پنجره UPVC",
+            "images": {
+                "close": "assets/Images/Windows/11/close.webp",
+                "open": "assets/Images/Windows/11/open.webp",
+                "alt": "پنجره و درب فرانسوی UPVC",
+                "folder_number": 11
+            }
+        },
+        {
+            "title": "توری پلیسه‌ای پنجره دوجداره UPVC",
+            "product_type": "window_screen",
+            "category": "توری پنجره",
+            "images": {
+                "close": "assets/Images/Lace/1/close.webp",
+                "open": "assets/Images/Lace/1/open.webp",
+                "alt": "توری پلیسه‌ای پنجره دوجداره UPVC",
+                "folder_number": 1
+            }
+        },
+        {
+            "title": "توری پنجره آکاردئونی افقی دو طرفه (پلیسه‌ای) UPVC",
+            "product_type": "window_screen",
+            "category": "توری پنجره",
+            "images": {
+                "close": "assets/Images/Lace/2/close.webp",
+                "open": "assets/Images/Lace/2/open.webp",
+                "alt": "توری پنجره آکاردئونی افقی دو طرفه (پلیسه‌ای) UPVC",
+                "folder_number": 2
+            }
+        },
+        {
+            "title": "توری پنجره کشویی افقی یک طرفه (پلیسه‌ای) UPVC",
+            "product_type": "window_screen",
+            "category": "توری پنجره",
+            "images": {
+                "close": "assets/Images/Lace/3/close.webp",
+                "open": "assets/Images/Lace/3/open.webp",
+                "alt": "توری پنجره کشویی افقی یک طرفه (پلیسه‌ای) UPVC",
+                "folder_number": 3
+            }
+        },
+        {
+            "title": "توری رولینگ عمودی پنجره دوجداره UPVC",
+            "product_type": "window_screen",
+            "category": "توری پنجره",
+            "images": {
+                "close": "assets/Images/Lace/4/close.webp",
+                "open": "assets/Images/Lace/4/open.webp",
+                "alt": "توری رولینگ عمودی پنجره دوجداره UPVC",
+                "folder_number": 4
+            }
+        }
+    ]
+}
